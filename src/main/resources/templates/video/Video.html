@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>Media Gallery</title>
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet">
+    <link href="/css/video/uploadVideo.css" rel="stylesheet">
+    <link href="/css/video/video.css" rel="stylesheet">
+    <link href="/css/bootstrap-fileupload.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div th:replace="common :: #leftmenu"></div>
+    <!-- left side end-->
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div th:replace="common :: headermenu"></div>
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                Image Manager
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="active"> Video Manager </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Image Manager
+                        </header>
+                        <div class="panel-body">
+                            <ul id="filters" class="media-filter">
+                                <li><a href="#" data-filter="*"> All</a></li>
+                                <li th:each="item:${category_list}"><a href="#" th:attr="data-filter=|.${item}|"> [[${item}]]</a></li>
+                            </ul>
+                            <a class="btn btn-success btn-sm" style="float: left; margin-top: 5px; margin-left: 10px" data-toggle="popover"><i class="fa fa-plus"></i></a>
+
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="popover" data-placement="bottom">Upload New File</button>
+                            </div>
+                            <div id="gallery" class="media-gal">
+                                <div th:class="|item ${item.category}|" th:each="item,iterStat:${video_list}">
+                                    <a th:href="@{|#infomation${iterStat.index}|}" data-toggle="modal">
+                                        <img th:src="@{|/video/face/${item.video_name}.png|}" alt="" th:name="${item.video_name}" th:attr="video_id=${item.id}"/>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 text-center clearfix">
+                                <ul class="pagination">
+                                    <li><a href="#">«</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">»</a></li>
+                                </ul>
+                            </div>
+                            <!--Modal-->
+                            <div class="modal fade" th:id="|play${iterStat.index}|" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true" th:each="item,iterStat:${video_list}">
+                                <div class="modal-dialog" style="margin-left: 400px">
+                                    <div class="video_box">
+                                        <div class="video_title">
+                                            <h2>视频标题</h2>
+                                            <div><a data-dismiss="modal" aria-hidden="true" name="close_video">&times;</a></div>
+                                        </div>
+                                        <div class="video">
+                                            <a href="javascript:;" class="play">&#xe61d;</a>
+                                            <video th:src="@{|/video/${item.video_name}|}" poster></video>
+                                            <div class="controls">
+                                                <a href="javascript:;" class="switch">&#xe623;</a>
+                                                <a href="javascript:;" class="enlarge">&#xe63d;</a>
+                                                <div class="time">
+                                                    <div class="progress">
+                                                        <div class="playprogress">
+                                                            <div class="slider"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="timedisplay">
+                                                        <span class="currentTime">00:00:00</span> / <span class="duration">00:00:00</span>
+                                                    </div>
+                                                </div>
+                                                <div class="speed">
+                                                    <div class="speed_btn">
+                                                        <ul>
+                                                            <li>0.5x</li>
+                                                            <li>0.75x</li>
+                                                            <li>1.0x</li>
+                                                            <li>1.25x</li>
+                                                            <li>1.5x</li>
+                                                            <li>2.0x</li>
+                                                        </ul>
+                                                    </div>
+                                                    <span>倍速</span>
+                                                </div>
+                                                <div class="volume">
+                                                    <a href="javascript:;" class="volume_btn">&#xe63e;</a>
+                                                    <input type="range" class="volume_range" min="0" max="100" value="100">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Modal-->
+                            <!-- Modal -->
+                            <div class="modal fade" th:id="|infomation${iterStat.index}|" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" th:each="item,iterStat:${video_list}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title">Edit Media Video</h4>
+                                        </div>
+                                        <div class="modal-body row">
+                                            <div class="col-md-5 img-modal">
+                                                <img th:src="@{|/video/face/${item.video_name}.png|}" alt="">
+                                                <a data-toggle="modal" th:data-target="|#play${iterStat.index}" class="btn btn-white btn-lg"><i class="fa fa-eye"></i> See Video</a>
+                                                <p class="mtop10"><strong>Video Name: [[${item.video_name}]]</strong></p>
+                                                <p><strong>Category：[[${item.category}]]</strong> </p>
+                                                <p><strong>Description: [[${item.description}]]</strong></p>
+                                                <p><strong>Uploaded at: [[${item.upload_date}]]</strong></p>
+                                                <p><strong>Type: [[${item.video_type}]]</strong></p>
+                                                <p><strong>Size: [[${#numbers.formatDecimal(item.size/1024.0/1024.0,0,2)}]]MB</strong></p>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <form th:action="@{/video/setVideoInfo}" method="post">
+                                                    <input class="hide" name="id" th:value="${item.id}"/>
+                                                    <div class="form-group">
+                                                        <label> Video Name:</label>
+                                                        <input name="video_name" th:value="${item.video_name}" class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label> Category</label>
+                                                        <select name="_class" class="form-control">
+                                                            <option th:value="其他" th:text="other" th:checked="${item.category==''}"></option>
+                                                            <option th:value="${cate}" th:checked="${item.category==cate}" th:each="cate:${category_list}" th:text="${cate}"></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label> Description</label>
+                                                        <textarea rows="7" name="description" class="form-control"></textarea>
+                                                    </div>
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-hidden="true">Concel</button>
+                                                        <button class="btn btn-success btn-sm" type="submit">Save Changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- modal -->
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer class="sticky-footer">
+            2020 &copy; AdminEx by ThemeBucket </a>
+        </footer>
+        <!--footer section end-->
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/modernizr.min.js"></script>
+<script src="/js/jquery.nicescroll.js"></script>
+<script src="/js/video/video.js"></script>
+<script src="/js/jquery.isotope.js"></script>
+<script src="/js/Eject.js"></script>
+<script src="/js/video/uploadVideo.js"></script>
+
+<script src="/js/video/video.js"></script>
+
+<!--common scripts for all pages-->
+<script src="/js/scripts.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        var $container = $('#gallery');
+        $container.isotope({
+            itemSelector: '.item',
+            animationOptions: {
+                duration: 750,
+                easing: 'linear',
+                queue: false
+            }
+        });
+        // filter items when filter link is clicked
+        $('#filters a').click(function() {
+            var selector = $(this).attr('data-filter');
+            $container.isotope({filter: selector});
+            return false;
+        });
+        $("div[id^='infomation'] a").click(function () {
+            $("div[id^='infomation']").modal("hide");
+        });
+    });
+</script>
+
+</body>
+</html>

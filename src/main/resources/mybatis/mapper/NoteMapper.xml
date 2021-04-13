@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduationproject.studymanager.mapper.NoteMapper">
+    <insert id="setNewNote" parameterType="com.graduationproject.studymanager.bean.Note">
+        insert into note(user_id, subject, upload_date, collect, category, file_name) values(#{user_id},#{subject},#{upload_date},#{collect},#{category},#{file_name})
+    </insert>
+    <update id="updateNoteInfo" parameterType="com.graduationproject.studymanager.bean.Note">
+        update note
+        <trim prefix="set" suffixOverrides=",">
+            <if test="subject!=null">subject = #{subject},</if>
+            <if test="category!=0">category = #{category},</if>
+            <if test="collect!=null">collect = #{collect},</if>
+            <if test="type!=null">type = #{type},</if>
+            <if test="file_name!=null">file_name = #{file_name},</if>
+        </trim>
+    </update>
+
+    <select id="getAllNotes" resultMap="NotesCategoryLists">
+        select * from category where user_id = #{user_id} and type=#{type}
+    </select>
+    <resultMap id="NotesCategoryLists" type="com.graduationproject.studymanager.bean.NoteCategory">
+        <id property="id" column="id"></id>
+        <result property="category" column="category"></result>
+        <collection property="notes" column="id" select="NotesLists" ofType="com.graduationproject.studymanager.bean.Note" javaType="ArrayList"></collection>
+    </resultMap>
+    <select id="NotesLists" resultMap="NoteResult">
+        select * from note where category = #{id}
+    </select>
+    <resultMap id="NoteResult" type="com.graduationproject.studymanager.bean.Note">
+        <id property="id" column="id"></id>
+        <result property="upload_date" column="upload_date"></result>
+        <result property="subject" column="subject"></result>
+        <result property="category" column="category"></result>
+        <result property="collect" column="collect"></result>
+        <result property="type" column="type"></result>
+        <result property="file_name" column="file_name"></result>
+    </resultMap>
+    <delete id="deleteNotes" parameterType="int">
+        delete from note where id=#{id}
+    </delete>
+
+</mapper>

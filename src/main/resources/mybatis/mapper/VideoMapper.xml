@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduationproject.studymanager.mapper.VideoMapper">
+    <insert id="uploadVideo" parameterType="com.graduationproject.studymanager.bean.Video">
+        insert into video(user_id, video_name, upload_date, video_type, size) values (#{user.id},#{video_name,},#{upload_date},#{video_type}, #{size})
+    </insert>
+
+    <select id="getAllVideos" parameterType="int" resultMap="videoResult">
+        select * from video where user_id = #{user_id}
+    </select>
+    <resultMap id="videoResult" type="com.graduationproject.studymanager.bean.Video">
+        <id property="id" column="id"></id>
+        <result property="video_name" column="video_name"></result>
+        <result property="upload_date" column="upload_date"></result>
+        <result property="description" column="description"></result>
+        <result property="video_type" column="video_type"></result>
+        <result property="category" column="category"></result>
+        <result property="size" column="size"></result>
+    </resultMap>
+    <update id="setVideoInfo">
+        update video
+        <trim prefix="set" suffixOverrides=",">
+            <if test="video_name!=null"> video_name=#{video_name},</if>
+            <if test="category!=null">category=#{category},</if>
+            <if test="description!=null">description=#{description}</if>
+        </trim>
+        where id=#{video_id}
+    </update>
+
+    <delete id="delVideos" parameterType="int">
+        delete from video where id in
+        <foreach collection="delVideolist" separator="," close=")" open="(" item="item">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>Indivial</title>
+
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/style-responsive.css" rel="stylesheet">
+  <link href="/css/crop/cropper.min.css" rel="stylesheet">
+  <link href="/css/crop/ImgCropping.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div th:replace="common :: #leftmenu"></div>
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div th:replace="common :: headermenu"></div>
+        <!-- header section end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <div class="profile-pic text-center">
+                                        <a href="#setImageModel" data-toggle="modal">
+                                            <img alt="Set Image" th:src="@{|/images/userImage/${user_info.image}|}" class="head">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel setheight">
+                                <div class="panel-body">
+                                    <ul class="p-info">
+                                        <li>
+                                            <div class="title">User Name</div>
+                                            <div class="desk"><span th:text="${user_info.user.userName}"></span></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Real Name</div>
+                                            <div class="desk"><span th:text="${user_info.realname}"></span></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Sex</div>
+                                            <div class="desk"><span th:text="${user_info.sex}"></span></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Age</div>
+                                            <div class="desk"><span th:text="${user_info.age}"></span></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Birthday</div>
+                                            <div class="desk"><span th:text="${#dates.format(user_info.birthday,'yyyy-MM-dd')}"></span></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Diploma</div>
+                                            <div class="desk"><span th:text="${user_info.diploma}"></span></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Adress</div>
+                                            <div class="desk"><span th:text="${user_info.address}"></span></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Email</div>
+                                            <div class="desk"><span th:text="${user_info.user.email}"></span></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Phone</div>
+                                            <div class="desk"><span th:text="${user_info.phone}"></span></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Hobby</div>
+                                            <div class="desk"><span th:text="${user_info.hobby}"></span></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <div class="profile-desk">
+                                        <h1 th:text="${user_info.realname}"></h1>
+                                        <span class="designation">Personalized Signature</span>
+                                        <p th:text="${user_info.sign}"></p>
+                                        <hr align=center size=1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <textarea class="form-control input-lg p-text-area" rows="16" placeholder="What happend today"></textarea>
+                                <footer class="panel-footer">
+                                    <button class="btn btn-post pull-right">Save</button>
+                                    <ul class="nav nav-pills p-option"></ul>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row state-overview">
+                <div class="col-md-3 col-xs-push-4">
+                    <div class="panel blue" id="image">
+                        <div class="symbol">
+                            <i class="fa fa-edit"></i>
+                        </div>
+                        <div class="state-value">
+                            <div class="title"><a th:href="@{/individual/individual/edit}" class="white">Set Individual</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+        <!--Model-->
+        <div class="modal fade" id="setImageModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="row">
+                        <!--图片裁剪框 start-->
+                        <div class="tailoring-container">
+                            <div class="tailoring-content">
+                                <div class="tailoring-content-one">
+                                    <label title="上传图片" for="chooseImg" class="l-btn choose-btn">
+                                        <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onchange="selectImg(this)">
+                                        选择图片
+                                    </label>
+                                </div>
+                                <div class="tailoring-content-two">
+                                    <div class="tailoring-box-parcel">
+                                        <img id="tailoringImg" th:src="@{|/images/userImage/${user_info.user.userName}_res.png|}" alt="Set Image">
+                                    </div>
+                                    <div class="preview-box-parcel">
+                                        <p>图片预览：</p>
+                                        <div class="circular previewImg"></div>
+                                    </div>
+                                </div>
+                                <div class="tailoring-content-three">
+                                    <button class="l-btn sureCut" id="sureCut">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--图片裁剪框 end-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Model-->
+        <!--footer section start-->
+        <footer class="sticky-footer">
+            2020 &copy; AdminEx by ThemeBucket </a>
+        </footer>
+        <!--footer section end-->
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/modernizr.min.js"></script>
+<script src="/js/jquery.nicescroll.js"></script>
+<script src="/js/crop/cropper.min.js"></script>
+<script src="/js/individual/individual_Image.js"></script>
+<script src="/js/image/Image_Edictor/service-mobile.js"></script>
+<script src="/js/Eject.js"></script>
+<!--Sparkline Chart-->
+<script src="/js/sparkline/jquery.sparkline.js"></script>
+<script src="/js/sparkline/sparkline-init.js"></script>
+
+<!--common scripts for all pages-->
+<script src="/js/scripts.js"></script>
+<script th:inline="javascript">
+    var name =[[${user_info.image}]];
+    $("a[href='#setImageModel'] img").attr('src','/images/userImage/'+name+'?random='+Math.random());
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>Login</title>
+
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/modernizr.min.js"></script>
+    <script src="/js/register-validation-init.js"></script>
+    <script>
+        $().ready(function(){
+           $("#register_form input[type=email]")
+               .after("<span class='error' th:if='${not #strings.isEmpty(register_msg)}'>[[${register_msg}]]</span>")
+
+        });
+    </script>
+</head>
+
+<body class="login-body">
+
+<div class="container">
+
+    <form class="form-signin" method="post" th:action="@{/login}">
+        <div class="form-signin-heading text-center">
+            <h1 class="sign-title" th:text="#{login.signtitle}">Sign In</h1>
+            <img src="/images/login-logo.png" alt=""/>
+        </div>
+        <div class="login-wrap">
+            <label style="color: red" th:text="${login_msg}" th:if="${not #strings.isEmpty(login_msg)}"></label>
+            <input type="text" name="userName" class="form-control" placeholder="Email Or UserName" th:placeholder="#{login.emailorusername}" autofocus>
+            <input type="password" name="passWord" class="form-control" placeholder="Password" th:placeholder="#{login.password}">
+            <button class="btn btn-lg btn-login btn-block" type="submit">
+                <i class="fa fa-check"></i>
+            </button>
+
+            <div class="registration" >
+                [[#{login.aremember}]]
+                <a data-toggle="modal" class="" href="#myRegister" th:text="#{login.signup}">Sign up</a>
+            </div>
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me"> [[#{login.remember}]]
+                <span class="pull-right">
+                    <a data-toggle="modal" href="#myModal" th:text="#{login.forget}"> Forgot Password?</a>
+                </span>
+            </label>
+        </div>
+    </form>
+        <!-- Modal -->
+
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" th:text="#{login.modal.forget}">Forgot Password ?</h4>
+                    </div>
+                    <form id="findpassword_form" method="post" th:action="@{/findpassword}">
+                    <div class="modal-body">
+                        <label style="color: red" th:text="${findpassword_msg}" th:if="${not #strings.isEmpty(findpassword_msg)}"></label>
+                        <p th:text="#{login.modal.prompt}">Enter your e-mail address below to reset your password.</p>
+                        <input type="email" name="email" placeholder="Email" th:placeholder="#{login.modal.email}" autocomplete="off" class="form-control placeholder-no-fix">
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button" th:text="#{login.modal.cancel}">Cancel</button>
+                        <button class="btn btn-primary" id=findpassword_sumbit type="submit" th:text="#{login.modal.submit}">Submit</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- modal -->
+
+    <div aria-hidden="true" aria-labelledby="myRegisterLabel" role="register_dialog" tabindex="-1" id="myRegister" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" th:text="#{login.register.signtitle}">Sign Up</h4>
+                    </div>
+                    <form id="register_form" method="post" th:action="@{/register}">
+                    <div class="modal-body">
+                        <p th:text="#{login.register.e-mail_tip}">Enter your e-mail address </p>
+                        <input type="email" id="email", name="Email" th:value='${email}?:null' placeholder="xxx@xx.com" autocomplete="off" class="form-control placeholder-no-fix" >
+                        <p th:text="#{login.resgister.username_tip}">Enter your UserName</p>
+                        <input type="text" id="username", name="userName" placeholder="UserName" th:placeholder="#{login.register.username}" autocomplete="off" class="form-control placeholder-no-fix" >
+                        <p th:text="#{login.register.password_tip}">Enter your passworld</p>
+                        <input type="password" id="password" name="passWord" placeholder="Alphanumeric 8 to 15 digits,cannot contain Spaces" th:placeholder="#{login.register.password}" autocomplete="off" class="form-control placeholder-no-fix">
+                        <p th:text="#{login.register.repassword_tip}">Enter repeatly your passworld</p>
+                        <input type="password" id="repassword" name="repassWord" placeholder="Keep the same completely with above" th:placeholder="#{login.register.repassword}" autocomplete="off" class="form-control placeholder-no-fix">
+                        <hr align=center size=1>
+                        <p><input type="checkbox" name="agree" value="agreement"> [[#{login.register.agreement_tip1}]] <a href="" th:text="#{login.register.agreement}"> agreement</a> [[#{login.register.agreement_tip2}]]</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button" th:text="#{login.register.cancel}">Cancel</button>
+                        <button class="btn btn-primary" type="submit" id=register_submit th:text="#{login.register.submit}">Submit</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+<div class="text-center">
+    <p class="mt-5 mb-3 text-muted">© 2020-2021</p>
+    <a class="btn btn-sm" th:href="@{/login.html(l=zh_CN)}">中文</a>
+    <a class="btn btn-sm" th:href="@{/login.html(l=en_US)}">English</a>
+</div>
+
+</body>
+</html>

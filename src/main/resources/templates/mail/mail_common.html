@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<aside th:fragment="leftmenu" class="mail-nav mail-nav-bg-color">
+    <header class="header"> <h4>Mailbox</h4> </header>
+    <div class="mail-nav-body">
+        <div class="text-center">
+            <a class="btn btn-compose" th:href="@{/mail/mail_compose}">
+                Compose Mail
+            </a>
+        </div>
+        <ul class="nav nav-pills nav-stacked mail-navigation">
+            <li class="active"><a href="mail.html"> <i class="fa fa-inbox"></i> Inbox  <span class="label label-danger pull-right inbox-notification">4</span></a></li>
+            <li><a href="#"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
+            <li><a href="#"> <i class="fa fa-certificate"></i> Important</a></li>
+            <li><a href="#"> <i class="fa fa-file-text-o"></i> Drafts <span class="label label-info pull-right inbox-notification">34</span></a></li>
+            <li><a href="#"> <i class="fa fa-trash-o"></i> Trash</a></li>
+        </ul>
+
+        <ul class="nav nav-pills nav-stacked labels-info ">
+            <li> <h5>Buddy online</h5> </li>
+            <li> <a href="#"> <i class="fa fa-comments text-success"></i> Jonathan Smith <p>I do not think</p></a>  </li>
+        </ul>
+    </div>
+</aside>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduationproject.studymanager.mapper.ScoreMapper">
+    <insert id="setNewScore">
+        insert into score(user_id,upload_date) values(#{user_id},#{upload_date})
+    </insert>
+    <update id="updateScore" parameterType="com.graduationproject.studymanager.bean.Score">
+        update score set upload_date = #{upload_date},description = #{description}, type = #{type},
+                subject = #{subject}, score = #{score}
+                where id = #{id}
+    </update>
+
+    <delete id="deleteScoreInfo" parameterType="int">
+        {call deleteScore(#{id,mode=IN})}
+    </delete>
+
+    <delete id="deleteScoreImage">
+        delete from score_image where score_id=#{score_id} and image=#{image_name}
+    </delete>
+
+    <select id="selectScoresInfo" parameterType="int" resultMap="resultsInfo">
+        select * from score where user_id = #{user_id} order by upload_date asc
+    </select>
+
+    <resultMap id="resultsInfo" type="com.graduationproject.studymanager.bean.Score">
+        <id property="id" column="id"></id>
+        <result property="subject" column="subject"></result>
+        <result property="score" column="score"></result>
+        <result property="upload_date" column="upload_date"></result>
+        <result property="description" column="description"></result>
+        <result property="type" column="type"></result>
+        <collection property="score_image" ofType="java.lang.String" javaType="ArrayList" select="getScoreImage" column="id"></collection>
+    </resultMap>
+    <select id="getScoreImage" resultType="java.lang.String">
+        select image from score_image where score_id = #{id}
+    </select>
+    <select id="getScoreId" parameterType="int" resultType="int">
+        select max(id) as new_id from score group by user_id = #{user_id}
+    </select>
+    <insert id="uploadScoreImage">
+        insert into score_image values(#{image},#{score_id});
+    </insert>
+
+</mapper>

@@ -1,0 +1,360 @@
+
+.timeline {
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: table;
+    position: relative;
+    table-layout: fixed;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.timeline .time-show {
+    margin-right: -75px;
+    margin-top: 30px;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.time-show .btn {
+    width: 150px;
+    height:50px;
+}
+
+.time-show .btn:hover {
+    opacity: 0.7;
+}
+
+.timeline .time-show a {
+    color: #fff;
+}
+
+.timeline h2{
+    font-size: larger;
+    font-weight: bolder;
+    color: red;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #1b2128;
+    padding: 10px;
+    width: 70%;
+}
+.timeline .left p{
+    margin-left: 30%;
+}
+.timeline .left h2{
+    margin-left: 30%;
+}
+.timeline p{
+    width: 70%;
+    padding-bottom: 15%;
+    border-bottom: 2px solid #1b2128;
+}
+.timeline textarea{
+    width: 70%;
+    border: 1px dotted #50ffe1;
+}
+
+.timeline input[name='subject'], .timeline input[name='score'], .timeline input[name='type']{
+    width: 40%;
+    border: 1px dotted #ff7463;
+}
+
+.timeline .info{
+    border: 3px dotted #00a1d6;
+    width:600px;
+}
+.timeline .left .info{
+    margin-left: 25%;
+}
+.timeline:before {
+    background-color: #d8d9df;
+    bottom: 0;
+    content: "";
+    left: 50%;
+    position: absolute;
+    top: 30px;
+    width: 1px;
+    z-index: 0;
+}
+
+h3.timeline-title {
+    margin: 0;
+    color: #C8CCD7;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0 0 5px;
+    text-transform: uppercase;
+}
+
+.t-info {
+    color: #C8CCD7;
+}
+
+.timeline-item:before, .timeline-item.left:after {
+    content: "";
+    display: block;
+    width: 50%;
+}
+
+.timeline-item {
+    display: table-row;
+}
+
+.timeline-desk {
+    display: table-cell;
+    vertical-align: top;
+    width: 50%;
+}
+
+.timeline-desk h1 {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0 0 5px;
+}
+
+.timeline-desk .panel {
+    display: block;
+    margin-left: 45px;
+    position: relative;
+    text-align: left;
+    background: #fff;
+}
+
+.timeline-item .timeline-desk .arrow {
+    border-bottom: 8px solid transparent;
+    border-top: 8px solid transparent;
+    display: block;
+    height: 0;
+    left: -7px;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    width: 0;
+}
+
+.timeline-item .timeline-desk .arrow {
+    border-right: 8px solid #fff !important;
+}
+
+.timeline-desk .arrow-alt {
+    border-bottom: 8px solid transparent;
+    border-top: 8px solid transparent;
+    display: block;
+    height: 0;
+    right: -7px;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    width: 0;
+    left: auto;
+}
+
+.timeline-desk .arrow-alt {
+    border-left: 8px solid #fff !important;
+}
+
+.timeline .timeline-icon {
+    left: -54px;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+}
+
+.timeline .timeline-icon {
+    background: #fff;
+    border: 1px solid #D8D9DF
+}
+
+.timeline-desk span a {
+    text-transform: uppercase;
+}
+
+.timeline-desk h1.red, .timeline-desk span a.red {
+    color: #EF6F66;
+}
+
+.timeline-desk h1.green, .timeline-desk span a.green {
+    color: #39B6AE;
+}
+
+.timeline-desk h1.blue, .timeline-desk span a.blue {
+    color: #56C9F5;
+}
+
+.timeline-desk h1.purple, .timeline-desk span a.purple {
+    color: #8074C6;
+}
+
+.timeline-desk h1.light-green, .timeline-desk span a.light-green {
+    color: #A8D76F;
+}
+
+.timeline-desk h1.yellow, .timeline-desk span a.yellow {
+    color: #fed65a;
+}
+
+.timeline .timeline-icon {
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    display: block;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    color: #1eaec3;
+    font-size: large;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.timeline .timeline-icon i {
+    margin-top: 9px;
+}
+
+.timeline-item.left .timeline-icon {
+    left: auto;
+    right: -56px;
+}
+
+.timeline-icon:hover{
+    background-color: #70f8ff;
+}
+
+.timeline .time-delete-icon {
+    margin-top: 11px;
+    float: left;
+    margin-left: 78%;
+    color: red;
+    font-size: large;
+    font-weight: bolder;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+    line-height: 20px;
+    border: 1px solid #D8D9DF;
+    background-color: white;
+}
+.timeline .time-delete-icon:hover{
+    background-color: #ffbc82;
+}
+.timeline .time-icon:before {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.timeline-desk h5 span {
+    color: #999999;
+    display: block;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.timeline-item.left:before {
+    display: none;
+}
+
+.timeline-item:before, .timeline-item.left:after {
+    content: "";
+    display: block;
+    width: 50%;
+}
+
+.right .upload-content{
+    float: right;
+}
+
+.upload-content .file{
+    width: 100px ;
+    height: 100px ;
+}
+.upload-content .file i{
+    bottom: 40px;
+    position: absolute;
+}
+.upload-content .file input{
+    width: 100px ;
+    height: 100px ;
+}
+
+.left .upload-content{
+    float: left;
+}
+
+.content-img li{
+    width:100px !important;
+    height:100px !important;
+}
+
+.upload-content .content-img-list-item div{
+    line-height:100px !important;
+}
+
+.upload-content .content-img-list-item{
+    line-height: 100px !important;
+}
+
+.content-img img{
+    width:100px !important;
+    height:100px !important;
+}
+
+.left .close{
+    float: left;
+    font-size: 30px;
+    font-weight: bolder;
+    color: #00a1d6;
+}
+.right .close{
+    float: right;
+    font-size: 30px;
+    font-weight: bolder;
+    color: #00a1d6;
+}
+
+
+.right a {
+    color: #1fb5ad;
+}
+
+.timeline-desk .panel {
+    margin-bottom: 5px;
+}
+
+.timeline-desk .album {
+    margin-top: 20px;
+}
+
+.timeline-item.left .timeline-desk .album {
+    margin-top: 20px;
+    float: right;
+}
+
+.timeline-desk .album a {
+    margin-right: 5px;
+    float: left;
+}
+
+.timeline-item.left .timeline-desk .album a {
+    margin-left: 5px;
+    float: right;
+}
+
+.timeline-desk .notification {
+    background: none repeat scroll 0 0 #FFFFFF;
+    margin-top: 20px;
+    padding: 8px;
+}
+
+.timeline-item.left .panel {
+    margin-left: 0;
+    margin-right: 45px;
+}
+
+.mbot30 {
+    margin-bottom: 30px;
+}
+
+.timeline-item.left h1, .timeline-item.left p, .timeline-item.left h2 {
+    text-align: right;
+}

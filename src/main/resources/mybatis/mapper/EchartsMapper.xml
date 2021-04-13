@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduationproject.studymanager.mapper.EchartsMapper">
+    <select id="getPieData" parameterType="int" resultType="java.util.HashMap">
+        SELECT* FROM
+	    (SELECT count( * ) AS image_count FROM image WHERE user_id = #{user_id} ) temp1
+	    INNER JOIN ( SELECT count( * ) AS score_count FROM score WHERE user_id = #{user_id} ) temp2
+	    INNER JOIN ( SELECT count( * ) AS note_count FROM note WHERE user_id = #{user_id} ) temp3
+	    INNER JOIN ( SELECT count( * ) AS video_count FROM video WHERE user_id = #{user_id} ) temp4
+    </select>
+</mapper>

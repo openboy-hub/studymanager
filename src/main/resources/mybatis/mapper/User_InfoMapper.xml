@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduationproject.studymanager.mapper.User_InfoMapper">
+    <select id="getUser_InfoByUser_Id" parameterType="int" resultMap="User_InfoResult">
+        select * from user join user_info on(user_info.user_id=user.id) where user_id = #{user_id};
+    </select>
+    <resultMap id="User_InfoResult" type="com.graduationproject.studymanager.bean.User_Info">
+        <id property="id" column="id"/>
+        <result property="age" column="age"/>
+        <result property="birthday" column="birthday"/>
+        <result property="sex" column="sex"/>
+        <result property="hobby" column="hobby"/>
+        <result property="sign" column="sign"/>
+        <result property="diploma" column="diploma"/>
+        <result property="phone" column="phone"/>
+        <result property="address" column="address"/>
+        <result property="realname" column="realname"/>
+        <result property="image" column="image"/>
+        <association property="user" javaType="com.graduationproject.studymanager.bean.User">
+            <id property="id" column="user_id"/>
+            <result property="userName" column="username"/>
+            <result property="email" column="email"/>
+        </association>
+    </resultMap>
+
+    <insert id="setUser_Info" parameterType="com.graduationproject.studymanager.bean.User_Info">
+        insert into user_info values(#{user.id},#{age},#{birthday},#{sex},#{hobby},#{sign},#{diploma},#{realname},#{address},#{phone});
+    </insert>
+
+    <update id="updateUser_Info" parameterType="com.graduationproject.studymanager.bean.User_Info">
+        update user_info
+        <trim prefix="set" suffixOverrides=",">
+            <if test="age != null">age=#{age},</if>
+            <if test="birthday != null">birthday=#{birthday},</if>
+            <if test="sex != null">sex=#{sex},</if>
+            <if test="hobby !=null">hobby=#{hobby},</if>
+            <if test="sign !=null">sign=#{sign},</if>
+            <if test="realname !=null">realname=#{realname},</if>
+            <if test="address !=null">address=#{address},</if>
+            <if test="phone !=null">phone=#{phone},</if>
+            <if test="diploma !=null">diploma=#{diploma}</if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <update id="setUserImage">
+        update user_info set image = #{image} where user_id = #{user_id}
+    </update>
+</mapper>

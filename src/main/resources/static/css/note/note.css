@@ -1,0 +1,106 @@
+
+.main {
+   width: 80%;
+   margin: 0 auto;
+}
+
+.upload-content .modal-dialog {
+   width: 100%;
+}
+
+.show {
+   text-align: center;
+   z-index: -1;
+}
+
+.upload-content .content-img-list {
+    display: inline-block;
+    width:100%;
+    padding: 0;
+}
+.upload-content .content-img-list .content-img-list-item{
+    margin: 10px;
+    width:85%;
+    float: left;
+    position: relative;
+    height: 100px;
+    display: block;
+    border-radius: 5px;
+    border: 1px solid white;
+    left: 7%;
+    box-shadow: 2px 2px 2px #8e8e8e;
+}
+.upload-content .content-img-list .content-img-list-item:hover{
+    background-color: #a3faff;
+}
+.upload-content .content-img-list .collect{
+    background-color: #f0ff5b;
+}
+
+.upload-content .content-img-list .content-img-list-item .tool{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border-radius: 10px 0 0 10px;
+    display: block;
+    width: 40px;
+    margin-left: 94.8%;
+}
+
+.upload-content .content-img-list .content-img-list-item .info{
+    float: right;
+    margin: 3px;
+}
+
+.upload-content .content-img-list .content-img-list-item .info h2{
+    display: block;
+    background-color: #00a1d6;
+}
+
+.upload-content .content-img-list .content-img-list-item .info h2:first-child{
+    background-color: #ff9e6d !important;
+    font-weight: bolder;
+    font-size: larger;
+    border-radius: 5px;
+}
+
+.upload-content .content-img{
+    width: 100%;
+}
+.upload-content .content-img .gcl {
+   font-size: 25px;
+   color: #aaa;
+}
+
+.upload-content .file {
+   position: relative;
+   display: inline-block;
+   border: 1px dashed #DEDEDE;
+   border-radius: 4px;
+   width: 70%;
+   height: 70%;
+   line-height: 40px;
+   text-align: center;
+   background-color: #fff;
+   vertical-align: top;
+   margin: 3%;
+   left: 10%
+}
+
+.upload-content .file input {
+   position: absolute;
+   right: 0;
+   top: 0;
+   opacity: 0;
+   cursor: pointer;
+   width: 70%;
+   height: 50px;
+}
+
+.upload-content .file:hover {
+   border: 1px dashed #3a75dc;
+}
+
+.editor .form-group a{
+    margin: 4px;
+    float: right;
+}

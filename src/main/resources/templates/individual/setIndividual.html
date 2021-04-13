@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>Individual Manager</title>
+
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/jquery.stepy.css" rel="stylesheet">
+  <link href="/css/style-responsive.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <div th:replace="common :: #leftmenu"></div>
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <div th:replace="common :: headermenu"></div>
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                Form Wizard
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Forms</a>
+                </li>
+                <li class="active">Form Wizard</li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+        <hr/>
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="square-widget">
+                        <div class="widget-container">
+                            <div class="stepy-tab"></div>
+                            <form id="setIndividualForm" class="form-horizontal" th:action="@{/individual/postIndividual}" th:method="POST">
+                                <fieldset title="Initial Info">
+                                    <legend>Personal Information</legend>
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-sm-2 control-label">USER NAME</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="text" placeholder="Username" class="form-control" th:name="user.userName" th:value="${user_info.user.userName}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-sm-2 control-label">REAL NAME</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="text" placeholder="Real Name" class="form-control" th:name="realname" th:value="${user_info.realname}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-sm-2 control-label">BIRTHDAY</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="date" placeholder="Birthday" class="form-control" th:name="birthday" th:value="${user_info.birthday}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-sm-2 control-label">AGE</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="number" placeholder="Age" class="form-control" th:name="age" th:value="${user_info.age}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-sm-2 control-label">SEX</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="radio-inline">
+                                                <input type="radio" th:name="sex" th:value="男" th:checked="${user_info.sex=='男'}">Male
+                                            </div>
+                                            <div class="radio-inline">
+                                                <input type="radio" th:name="sex" th:value="女" th:checked="${user_info.sex=='女'}">Female
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="Contact Info">
+                                    <legend>Contact Details</legend>
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-sm-2 control-label">PHONE</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="text" placeholder="Phone" class="form-control" th:name="phone" th:value="${user_info.phone}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-sm-2 control-label">EMAIL</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="text" placeholder="Email" class="form-control" th:name="user.email" th:value="${user_info.user.email}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-sm-2 control-label">ADDRESS</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="text" th:placeholder="Address" class="form-control" th:name="address" th:value="${user_info.address}">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="Personal Details">
+                                    <legend>Personal Details</legend>
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-sm-2 control-label">HOBBY</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="text" placeholder="Hobby" class="form-control" th:name="hobby" th:value="${user_info.hobby}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-sm-2 control-label">DIPLOMA</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <select class="form-control" th:name="diploma" placeholder="Diploma">
+                                                <option value="文盲" th:selected="${user_info.diploma=='文盲'}">文盲</option>
+                                                <option value="幼儿园" th:selected="${user_info.diploma=='幼儿园'}">幼儿园</option>
+                                                <option value="小学" th:selected="${user_info.diploma=='小学'}">小学</option>
+                                                <option value="中学" th:selected="${user_info.diploma=='中学'}">中学</option>
+                                                <option value="大学" th:selected="${user_info.diploma=='大学'}">大学</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-sm-2 control-label">SIGN</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <textarea rows="5" cols="60" class="form-control" th:name="sign" th:value="${user_info.sign}"></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="Final Step">
+                                    <legend>Final Step Information</legend>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <p>Congratulations This is the Final Step</p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <button class="btn btn-info finish">Finish </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer class="sticky-footer">
+            2020 &copy; AdminEx by ThemeBucket
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/jquery.stepy.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/modernizr.min.js"></script>
+<script src="/js/jquery.nicescroll.js"></script>
+
+
+<!--common scripts for all pages-->
+<script src="/js/scripts.js"></script>
+
+<script>
+    /*=====STEPY WIZARD====*/
+    $(function() {
+        $('#setIndividualForm').stepy({
+            backLabel: 'Previous',
+            block: true,
+            nextLabel: 'Next',
+            titleClick: true,
+            titleTarget: '.stepy-tab'
+        });
+    });
+</script>
+
+</body>
+</html>

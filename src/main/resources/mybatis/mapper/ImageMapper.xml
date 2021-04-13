@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduationproject.studymanager.mapper.ImageMapper">
+    <insert id="insertImage" parameterType="java.util.List">
+        insert into image(user_id,image_name,upload_date,image_type,size) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item.user.id},#{item.image_name},#{item.upload_date},#{item.image_type},#{item.size})
+        </foreach>
+    </insert>
+
+    <select id="selectAllImage" parameterType="int" resultMap="imageResult">
+        select * from image  where user_id = #{user_id}
+    </select>
+    <resultMap id="imageResult" type="com.graduationproject.studymanager.bean.Image">
+        <id property="id" column="id"/>
+        <result property="image_name" column="image_name"/>
+        <result property="upload_date" column="upload_date"/>
+        <result property="collect" column="collect"/>
+        <result property="description" column="description"/>
+        <result property="size" column="size"/>
+        <result property="image_type" column="image_type"/>
+        <result property="category" column="category"/>
+    </resultMap>
+
+    <update id="setImageInfo">
+        update image
+        <trim prefix="set" suffixOverrides=",">
+            <if test="image_name!=null"> image_name=#{image_name},</if>
+            <if test="category!=null">category=#{category},</if>
+            <if test="description!=null">description=#{description},</if>
+        </trim>
+        where id=#{image_id}
+    </update>
+
+    <delete id="deleteImages" parameterType="int">
+        delete from image where id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>
